@@ -10,6 +10,8 @@
    public $body;
    public $author;
    public $created_at;
+   public $comment_text;
+   public $count_comments ;
 
    //CONSTRUCTOR WITH DB
    public function __construct($db){
@@ -18,9 +20,11 @@
    public function read(){
 
      $query = 'SELECT c.name as category_name, p.id, p.category_id, p.title, p.body,
-          p.author,
-          p.created_at
-          FROM '. $this->table . ' p LEFT JOIN categories c ON p.category_id  = c.id ORDER BY p.created_at DESC';
+     p.author,
+     p.created_at,
+     com.post_id,
+     com.comment_text
+     FROM'.$this->table. 'p LEFT JOIN categories c ON p.category_id = c.id LEFT JOIN comments com ON p.id = com.post_id';
 
       $stmt = $this->conn->prepare($query);
       $stmt->execute();

@@ -26,11 +26,15 @@
         'body' => html_entity_decode($body),
         'author' => $author,
         'category_id' => $category_id,
-        'category_name' => $category_name
+        'category_name' => $category_name,
+        'comments' => array( 
+          $comment_text??"No comments"
+        )
       );
       // Push to "data"
       // array_push($posts_arr, $post_item);
       array_push($posts_arr['data'], $post_item);
+
     }
     // Turn to JSON & output
     echo json_encode($posts_arr);
